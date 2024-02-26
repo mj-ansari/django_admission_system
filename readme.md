@@ -1,12 +1,23 @@
-python -m venv env
+Create a new virtual environment for this project <br />
+python -m venv env <br /><br />
 
-.\env\Scripts\activate
+activate env using this command <br />
+.\env\Scripts\activate  <br /><br />
 
-admin panel 
-root
-root
+install dependencies using requirements.txt  <br />
+pip install -r .\requirements.txt  <br /><br />
 
-student account 
-John
-john@test.com
-john123@$
+run django project using this command <br />
+python.exe .\manage.py runserver  <br /><br />
+
+default username-passsword for admin account <br />
+username - root  <br />
+password - root  <br /><br />
+
+default username-passsword for dummy student account  <br />
+username - John   <br />
+password - john@test.com  <br />
+email - john@test.com  <br />
+
+
+
