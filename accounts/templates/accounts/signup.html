@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Signup{% endblock %}
+{% block content %}
+
+
+<div class="container col-xl-10 px-4 py-0">
+    <div class="col align-items-center g-lg-5" id="signup">
+        <div class="col-md-10 mx-auto col-lg-5">
+            <form method="post" class="p-4 p-md-5 shadow border rounded-3 bg-body-tertiary">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <p class="fs-1 text-center">Signup Form</p>
+                <div class="form-floating mb-3">
+                    {{ form.username }}
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {{ form.username.errors }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.email }}
+                    <label for="{{ form.username.id_for_label }}">Email</label>
+                    {{ form.email.errors }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.password1 }}
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    {{ form.password1.errors }}
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.password2 }}
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    {{ form.password2.errors }}
+                </div>
+                <button class="btn btn-dark col-md-3" type="submit">Signup</button>
+                <hr class="my-4">
+                <div class="text-center">
+                    <span class="text-body-secondary">Already a user ? <a href="{% url 'login' %}">Login
+                            here</a></span  >
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

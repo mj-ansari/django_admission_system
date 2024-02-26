@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- Existing User -->
+{% if user.profile %}
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-4 mb-3">
+            <div class="rounded overflow-hidden d-flex justify-content-center align-items-center"
+                style="width: 200px; height: 200px;">
+                <img src="{{user.profile.document.student_image.url}}" alt="Profile Picture" class="img-fluid">
+            </div>
+            <br>
+            <button class="btn btn-outline-dark">Edit Profile</button>
+
+        </div>
+        <div class="col-md-4 my-3">
+            <h4 class="text-primary">Personal Details</h4>
+            <hr>
+            <span>First Name : {{user.profile.first_name}}</span><br>
+            <span>Last Name : {{user.profile.last_name}}</span><br>
+            <span>Contact : {{user.profile.contact}}</span><br>
+            <span>Gender : {{user.profile.gender}}</span><br>
+            <span>Aadhaar No. : {{user.profile.aadhar_no}}</span><br>
+            <span>Birth Date : {{user.profile.birth_date}}</span><br>
+            <span>Address : {{user.profile.address}}</span><br>
+            <span>State : {{user.profile.state}}</span><br>
+            <span>City : {{user.profile.city}}</span><br>
+            <span>Pin : {{user.profile.pin}}</span><br>
+            <span>Religioin : {{user.profile.religion}}</span><br>
+            <span>Category : {{user.profile.category}}</span><br>
+        </div>
+        <div class="col-md-4 my-3">
+            <h4 class="text-primary">Educational Details</h4>
+            <hr>
+            <span>School Name : {{user.profile.education.school_name}}</span><br>
+            <span>Stream : {{user.profile.education.stream}}</span><br>
+            <span>10th Percentage : {{user.profile.education.percentage_10th}}</span><br>
+            <span>12th Percentage : {{user.profile.education.percentage_12th}}</span><br>
+            {% if user.profile.education.college_name %}
+            <span>College Name : {{user.profile.education.college_name}}</span><br>
+            {% endif %}
+            {% if user.profile.education.college_name %}
+            <span>College CGPA : {{user.profile.education.college_cgpa}}</span><br>
+            {% endif %}
+
+            <hr>
+            <h4 class="text-primary">Documents</h4>
+            <a class="link-dark" href="{{user.profile.document.student_image.url}}" target="_blank">Profile</a><br>
+            <a class="link-dark" href="{{user.profile.document.aadhar_image.url}}" target="_blank">Aadhaar</a><br>
+            <a class="link-dark" href="{{user.profile.document.marksheet_10th.url}}" target="_blank">10th
+                Marksheet</a><br>
+            <a class="link-dark" href="{{user.profile.document.marksheet_12th.url}}" target="_blank">12th
+                Marksheet</a><br>
+
+            {% if user.profile.education.marksheet_clg %}
+            <a class="link-dark" href="{{user.profile.document.marksheet_clg.url}}" target="_blank">College
+                Marksheet</a><br>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+</div>
+
+<!-- New User -->
+{% else %}
+<br>
+<div class="container col-xl-10 px-4 py-3">
+    <div class="col align-items-center g-lg-5">
+        <div class="col-md-10 mx-auto col-lg-8">
+            <div class="card shadow border rounded-3 bg-body-tertiary">
+                <div class="card-header">
+                    Welcome {{request.user}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Your profile is incomplete !!</h5>
+                    <p class="card-text">When you apply in a course, everything related to your profile will be updated here.</p>
+                    <a href="{% url 'admission' %}" class="btn btn-dark">Apply Now !!!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

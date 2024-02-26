@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container col-xl-10 col-xxl-8 px-4">
+    <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">We Are Always Here To listen You</h1>
+            <p class="col-lg-10 fs-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium recusandae
+                dolorum laudantium officia ad vero tenetur. Saepe, hic reiciendis exercitationem architecto aperiam</p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5">
+            <form method="post" hx-target="body" hx-swap='outerHTML'
+                class="px-4 p-md-5 shadow border rounded-3 bg-body-tertiary">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-floating mb-3">
+                    {{ form.email.errors }}
+                    {{ form.email }}
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{ form.message.errors }}
+                    {{ form.message }}
+                    <label for="{{ form.message.id_for_label }}">Message</label>
+                </div>
+                <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
+                <hr class="my-4">
+                <small class="text-body-secondary">We will never share your email with anyone</small>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'admission/carousel.html' %}
+
+
+<!-- Courses Section -->
+<div class="album py-5 bg-body-tertiary" id="courses">
+    <h1 class="display-5 fw-bold text-center mb-5">Trending Courses</h1>
+    <div class="container mb-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+            {% for c in courses  %}
+            <div class="col">
+                <div class="card shadow">
+                    <img src="{{c.image.url}}" alt="" width="100%">
+                    <div class="card-body">
+                        <span class="card-text fw-bold">Name : {{c.course_name}} ({{c.duration}} years)</span><br>
+                        <span class="card-text fw-bold">Description :</span><span>{{c.description|truncatewords:20}}</span><br>
+                        <span class="card-text fw-bold">Criteria : </span><span> {{c.percent_criteria}} %</span>
+                        <p class="card-text fw-bold">Fee : {{c.fee}} Rs.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-dark" href="{% url 'admission' %}">Apply</a>
+                            </div>
+                            <small class="text-body-secondary">{{c.seats}} seats left</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-center">
+        <a href="{% url 'courses' %}" class="btn btn-dark btn-lg px-4 gap-3">All Courses</a>
+    </div>
+</div>
+
+<!-- Motto Section -->
+<div class="px-4 py-3 my-5 text-center" id="about">
+    <img class="d-block mx-auto mb-4" src="/static/img/college-svgrepo-com.svg" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold">About us</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ea, nemo neque ut
+            saepe quisquam nulla sed magni tenetur aliquam asperiores nobis sint dignissimos ex mollitia, quibusdam
+            sapiente labore iusto.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'about' %}" class="btn btn-dark btn-lg px-4 gap-3">More...</a>
+        </div>
+    </div>
+</div>
+
+<!-- Quote Section -->
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <p>A well-known quote, contained in a blockquote element.</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+    </figcaption>
+</figure>
+
+{% endblock content %}

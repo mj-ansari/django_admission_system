@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg border-bottom py-3" aria-label="HomeNavbar">
+    <div class="container">
+        <a class="navbar-brand fs-4 link-body-emphasis text-decoration-none" href="{% url 'index' %}">MyCollege</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#HomeNavbar"
+            aria-controls="HomeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="HomeNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav_underline">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link" href="{% url 'admission' %}">Admission</a>
+                </li>
+            </ul>
+
+            <div class="btn-group">
+                {% if not user.is_authenticated %}
+                <a class="btn btn-dark  px-4" href="{% url 'login' %}">Login</a>
+                {% else %}
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    @{{user.username}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>    
+                    <li><a class="dropdown-item" href="{% url 'feedback' %}">Feedback</a></li>
+                    <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input class="dropdown-item" type="submit" value="Logout">
+                    </form>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

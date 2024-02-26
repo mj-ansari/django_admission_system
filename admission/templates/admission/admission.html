@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- If Student Data Exists  -->
+{% if student_data %}
+
+{% for stud in student_data %}
+        <div class="container px-4">
+            <div class="col align-items-center py-5">
+                <div class="mx-auto col-lg-8">
+                    <div class="p-3 px-md-5 shadow border rounded-3 bg-body-tertiary">
+                        <p class="fs-1 text-center">Admission Details</p>
+                        <hr class="my-4">
+
+                        {% if stud.admission.status == "Pending" %}
+
+                        <p class="text-center fs-5">Your admission status is in <span class='badge text-bg-warning'>{{stud.admission.status}}</span> state, kindly wait for few days...</p>
+                        
+                        {% elif stud.admission.status == "Active" %}
+                        
+                        <div >
+                            <p>Course name : {{stud.admission.course}}</p>
+                            <p>Duration : {{stud.admission.course.duration}} years</p>
+                            <p>Fee : {{stud.admission.course.fee}}</p>
+                            <p>Description : {{stud.admission.course.description}}</p>
+                            <p>status : <span class='badge text-bg-success'>{{stud.admission.status}}</span></p>
+                        </div>
+                        
+                        {% endif %}
+                        
+                        <hr class="my-4">
+                        <div class="text-center">
+                            <a href="{% url 'profile' %}" class="btn btn-dark">Go to Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+
+
+<!-- If Student Data Not Exists -->
+{% else %}
+<div class="container">
+    <div class="row g-5 py-4">
+        <form class="needs-validation" novalidate="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-7 col-lg-8">
+                    {{student_form.non_field_errors}}
+                    <h4 class="text-primary mb-3">Personal Details</h4>
+                    <div class="row gy-3">
+                        <div class="col-sm-6">
+                            <label for="{{student_form.first_name.id_for_label}}" class="form-label">First Name</label>
+                            {{student_form.first_name}}
+                            {{ student_form.first_name.errors|escape }}
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="{{student_form.last_name.id_for_label}}" class="form-label">Last Name</label>
+                            {{student_form.last_name}}
+                            {{ student_form.last_name.errors|escape }}
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="{{student_form.contact.id_for_label}}" class="form-label">Contact</label>
+                            {{student_form.contact}}
+                            {{ student_form.contact.errors|escape }}
+                            <div class="invalid-feedback">
+                                Your contact is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="{{student_form.birth_date.id_for_label}}" class="form-label">Bith-date</label>
+                            {{student_form.birth_date}}
+                            {{ student_form.birth_date.errors|escape }}
+                            <div class="invalid-feedback">
+                                Your bith date is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="{{student_form.religion.id_for_label}}" class="form-label">Religion</label>
+                            {{student_form.religion}}
+                            {{ student_form.religion.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please select a valid religion.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="{{student_form.category.id_for_label}}" class="form-label">Category</label>
+                            {{student_form.category}}
+                            {{ student_form.category.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please select a valid category.
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="{{student_form.aadhar_no.id_for_label}}" class="form-label">Aadhaar
+                                Number</label>
+                            {{student_form.aadhar_no}}
+                            {{ student_form.aadhar_no.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please enter your aadhaar number.
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="form-label">Gender</label>
+                            <div class="d-flex form-check">
+                                {% for value, label in student_form.fields.gender.choices %}
+                                <span class="me-5">
+                                    <input class="form-check-input" type="radio" name="gender"
+                                        id="id_gender_{{ forloop.counter }}" value="{{ value }}" required {% if forloop.first %}checked{% endif %}>
+                                    <label class="form-check-label" for="id_gender_{{ forloop.counter }}">{{ label }}</label>
+                                </span>
+                                {% endfor %}
+                            </div>
+                            {{ student_form.gender.errors|escape }}
+                        </div>
+
+                        <div class="col-12">
+                            <label for="{{student_form.address.id_for_label}}" class="form-label">Address</label>
+                            {{student_form.address}}
+                            {{ student_form.address.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please enter your address.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="{{student_form.state.id_for_label}}" class="form-label">State</label>
+                            {{student_form.state}}
+                            {{ student_form.state.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="{{student_form.city.id_for_label}}" class="form-label">City</label>
+                            {{student_form.city}}
+                            {{ student_form.city.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please select a valid city.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="{{student_form.pin.id_for_label}}" class="form-label">Pin</label>
+                            {{student_form.pin}}
+                            {{ student_form.pin.errors|escape }}
+                            <div class="invalid-feedback">
+                                Pin code is required.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+
+                    <h4 class="text-primary mb-3">Education Details</h4>
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <label for="{{education_form.school_name.id_for_label}}" class="form-label">School
+                                name</label>
+                            {{education_form.school_name}}
+                            {{ education_form.school_name.errors|escape }}
+                            <div class="invalid-feedback">
+                                School name is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{education_form.stream.id_for_label}}" class="form-label">Stream</label>
+                            {{education_form.stream}}
+                            {{ education_form.stream.errors|escape }}
+                            <div class="invalid-feedback">
+                                Please select a valid stream.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{education_form.percentage_10th.id_for_label}}" class="form-label">10th
+                                Percentage</label>
+                            {{education_form.percentage_10th}}
+                            {{ education_form.percentage_10th.errors|escape }}
+                            <div class="invalid-feedback">
+                                10th percentage is required
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="{{education_form.percentage_12th.id_for_label}}" class="form-label">12th
+                                Percentage</label>
+                            {{education_form.percentage_12th}}
+                            {{ education_form.percentage_12th.errors|escape }}
+                            <div class="invalid-feedback">
+                                12th percentage is required
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <input type="checkbox" class="form-check-input me-2" id="toggle-college">
+                            <label class="form-check-label" for="toggle-cgpa">Check this if you have bachelor's
+                                degree</label>
+                        </div>
+
+                        <div id="elementCollege" style="display: none;">
+                            <div class="col">
+                                <label for="{{education_form.college_name.id_for_label}}" class="form-label">College
+                                    Name</label>
+                                {{education_form.college_name}}
+                                {{ education_form.college_name.errors|escape }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{education_form.college_cgpa.id_for_label}}" class="form-label">College
+                                    CGPA</label>
+                                {{education_form.college_cgpa}}
+                                {{ education_form.college_cgpa.errors|escape }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-lg-4 order-md-last">
+
+                    <h4 class="text-primary mb-3">Documents</h4>
+                    <div class="row gy-3">
+                        <div class="col-12">
+                            <label for="{{document_form.student_image.id_for_label}}" class="form-label">Student
+                                Photo</label>
+                            {{document_form.student_image}}
+                            {{ document_form.student_image.errors|escape }}
+                        </div>
+                        <div class="col-12">
+                            <label for="{{document_form.aadhar_image.id_for_label}}" class="form-label">Aadhaar Card
+                                Photo</label>
+                            {{document_form.aadhar_image}}
+                            {{ document_form.aadhar_image.errors|escape }}
+                        </div>
+                        <div class="col-12">
+                            <label for="{{document_form.marksheet_10th.id_for_label}}" class="form-label">10th Marksheet
+                                Photo</label>
+                            {{document_form.marksheet_10th}}
+                            {{ document_form.marksheet_10th.errors|escape }}
+                        </div>
+                        <div class="col-12">
+                            <label for="{{document_form.marksheet_12th.id_for_label}}" class="form-label">12th Marksheet
+                                Photo</label>
+                            {{document_form.marksheet_12th}}
+                            {{ document_form.marksheet_12th.errors|escape }}
+                        </div>
+                        <div id="elementDoc" style="display: none;">
+                            <div class="col-12">
+                                <label for="{{document_form.marksheet_clg.id_for_label}}" class="form-label">College
+                                    Marksheet Photo</label>
+                                {{document_form.marksheet_clg}}
+                                {{ document_form.marksheet_clg.errors|escape }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="{{admission_form.course.id_for_label}}" class="form-label">Course</label>
+                            {{admission_form.course}}
+                            {{ admission_form.course.errors|escape }}
+                        </div>
+                    </div>
+                    <div class="col mt-3">
+                        <button class="w-50 btn btn-dark btn-lg" type="submit">Register</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/script.js' %}"></script>  
+{% endif %}
+{% endblock content %}
+
