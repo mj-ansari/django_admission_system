@@ -16,7 +16,7 @@ password - root  <br /><br />
 
 default username-passsword for dummy student account  <br />
 username - John   <br />
-password - john@test.com  <br />
+password - john123@$  <br />
 email - john@test.com  <br />
 
 you can check website running at </br>
