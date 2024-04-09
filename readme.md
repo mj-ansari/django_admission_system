@@ -19,8 +19,6 @@ username - John   <br />
 password - john123@$  <br />
 email - john@test.com  <br />
 
-you can check website running at </br>
-http://127.0.0.1:8000/
 
 
 
